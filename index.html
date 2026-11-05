@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070d19">
+<title>FridgeLink · GSM Remote Refrigerator Monitoring (Simulation)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-tab="fridge">
+
+<header class="top">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M5 9.5h14M8.5 6v1.5M8.5 12.5v3"/></svg>
+    </span>
+    <div><h1>FridgeLink</h1><p>GSM remote refrigerator monitoring · simulation</p></div>
+  </div>
+  <div class="top-right">
+    <div class="clock"><span id="simDate">—</span><strong id="simClock">--:--:--</strong></div>
+    <div class="seg" role="group" aria-label="Simulation speed">
+      <button data-speed="1">1×</button><button data-speed="10" class="on">10×</button><button data-speed="60">60×</button><button data-speed="300">300×</button>
+    </div>
+    <button class="icon-btn" id="pauseBtn" aria-label="Pause simulation" title="Pause / resume">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+    </button>
+    <button class="icon-btn" id="soundBtn" aria-label="Toggle sound" title="Sound">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path class="wave" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="layout">
+
+<!-- ============================ FRIDGE ============================ -->
+<section class="pane pane-fridge" id="pane-fridge" aria-label="Refrigerator">
+  <div class="fridge-wrap" id="fridgeWrap">
+    <div class="fridge" id="fridge" data-door="closed" data-comp="off" data-xray="off">
+      <div class="fr-body">
+        <div class="fr-top">
+          <div class="fr-display" id="display">
+            <div class="disp-icons">
+              <span class="di" id="diGsm"><i></i>GSM</span>
+              <span class="di" id="diPwr"><i></i>PWR</span>
+              <span class="di" id="diCool"><i></i>COOL</span>
+            </div>
+            <div class="disp-temp"><span id="dispTemp">--.-</span><small>°C</small></div>
+            <div class="disp-sub" id="dispSub">STARTING</div>
+          </div>
+          <div class="fr-handle hf"></div>
+        </div>
+
+        <div class="fr-bottom">
+          <div class="cavity" id="cavity">
+            <svg class="inside" viewBox="0 0 300 410" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4fbff"/><stop offset="1" stop-color="#cfe3ee"/></linearGradient>
+                <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#a7d4e8" stop-opacity=".55"/></linearGradient>
+                <linearGradient id="carton" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#dfe7ee"/></linearGradient>
+                <linearGradient id="oj" x1="0" x2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#f08a12"/></linearGradient>
+                <linearGradient id="grn" x1="0" x2="1"><stop offset="0" stop-color="#7bd389"/><stop offset="1" stop-color="#3a9d56"/></linearGradient>
+                <radialGradient id="tom" cx=".35" cy=".3"><stop offset="0" stop-color="#ff8a7a"/><stop offset="1" stop-color="#d62f2f"/></radialGradient>
+              </defs>
+              <rect width="300" height="410" fill="url(#wall)"/>
+              <path d="M150 0v410" stroke="#fff" stroke-opacity=".25"/>
+              <!-- shelf 1 -->
+              <g>
+                <rect x="26" y="52" width="38" height="58" rx="3" fill="url(#carton)"/><path d="M26 52l19-14 19 14z" fill="#e9eef3"/><rect x="26" y="70" width="38" height="22" fill="#3b82f6"/><text x="45" y="85" font-size="9" font-weight="700" text-anchor="middle" fill="#fff">MILK</text>
+                <rect x="76" y="40" width="26" height="70" rx="6" fill="url(#oj)"/><rect x="82" y="28" width="14" height="14" rx="3" fill="#f6f6f6"/><rect x="76" y="64" width="26" height="22" fill="#fff" fill-opacity=".85"/>
+                <rect x="114" y="74" width="34" height="36" rx="5" fill="#fde2e2"/><rect x="112" y="68" width="38" height="9" rx="3" fill="#d94b4b"/>
+                <rect x="160" y="46" width="22" height="64" rx="8" fill="#bfe6ff" fill-opacity=".85"/><rect x="164" y="36" width="14" height="12" rx="3" fill="#2f80ed"/>
+                <rect x="194" y="82" width="30" height="28" rx="4" fill="#fff"/><rect x="194" y="82" width="30" height="8" rx="3" fill="#ec6aa5"/>
+                <rect x="230" y="82" width="30" height="28" rx="4" fill="#fff"/><rect x="230" y="82" width="30" height="8" rx="3" fill="#7cc576"/>
+              </g>
+              <rect x="6" y="110" width="288" height="7" rx="3" fill="url(#glass)"/><rect x="6" y="116" width="288" height="3" fill="#7fb3cb" fill-opacity=".35"/>
+              <!-- shelf 2: vaccines + medicines -->
+              <g>
+                <rect x="24" y="150" width="96" height="55" rx="5" fill="#fff"/><rect x="24" y="150" width="96" height="14" rx="5" fill="#e23d3d"/>
+                <path d="M44 172h12v-9h8v9h12v8H64v9h-8v-9H44z" fill="#e23d3d" transform="translate(-4 4)"/>
+                <text x="98" y="183" font-size="8.5" font-weight="700" text-anchor="middle" fill="#334">VACCINES</text><text x="98" y="194" font-size="7" text-anchor="middle" fill="#667">2 – 8 °C</text>
+                <rect x="134" y="170" width="14" height="35" rx="3" fill="#8ec5ff"/><rect x="136" y="164" width="10" height="8" rx="2" fill="#e8eef4"/>
+                <rect x="152" y="176" width="14" height="29" rx="3" fill="#ffd27a"/><rect x="154" y="170" width="10" height="8" rx="2" fill="#e8eef4"/>
+                <rect x="172" y="168" width="38" height="37" rx="4" fill="#fffbe9"/><rect x="172" y="168" width="38" height="9" rx="3" fill="#f2c94c"/><text x="191" y="194" font-size="8" font-weight="700" text-anchor="middle" fill="#a67c00">INSULIN</text>
+                <g fill="#fff8e6" stroke="#e5d9b6"><ellipse cx="228" cy="196" rx="9" ry="11"/><ellipse cx="246" cy="196" rx="9" ry="11"/><ellipse cx="264" cy="196" rx="9" ry="11"/><ellipse cx="237" cy="187" rx="9" ry="11"/><ellipse cx="255" cy="187" rx="9" ry="11"/></g>
+              </g>
+              <rect x="6" y="205" width="288" height="7" rx="3" fill="url(#glass)"/><rect x="6" y="211" width="288" height="3" fill="#7fb3cb" fill-opacity=".35"/>
+              <!-- shelf 3: food -->
+              <g>
+                <rect x="22" y="246" width="82" height="48" rx="6" fill="#e9f4ff" stroke="#b6d6ef"/><rect x="20" y="240" width="86" height="10" rx="4" fill="#5aa9e6"/><path d="M34 274q8-12 18 0t20 0" fill="none" stroke="#f28c28" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="130" cy="278" r="17" fill="url(#tom)"/><circle cx="160" cy="282" r="14" fill="url(#tom)"/><circle cx="146" cy="262" r="13" fill="url(#tom)"/>
+                <path d="M138 252l8 6 8-6" stroke="#2f8f4a" stroke-width="3" fill="none"/>
+                <path d="M190 294c-14-4-22-22-10-34 6-10 22-12 30-2 14-4 28 8 22 22-4 10-18 18-42 14z" fill="url(#grn)"/><path d="M206 292c0-14 6-24 14-30" stroke="#2c7b44" stroke-width="2" fill="none"/>
+                <path d="M244 294v-26l30 8v18z" fill="#ffd666"/><path d="M244 268l30 8-30 2z" fill="#ffe58f"/><circle cx="256" cy="284" r="2.5" fill="#e8b83a"/><circle cx="266" cy="287" r="2" fill="#e8b83a"/>
+              </g>
+              <rect x="6" y="294" width="288" height="7" rx="3" fill="url(#glass)"/><rect x="6" y="300" width="288" height="3" fill="#7fb3cb" fill-opacity=".35"/>
+              <!-- crisper -->
+              <g>
+                <rect x="14" y="318" width="272" height="86" rx="10" fill="#cfe9f5" fill-opacity=".55" stroke="#fff" stroke-opacity=".8"/>
+                <rect x="30" y="344" width="22" height="48" rx="11" fill="#f28c28"/><rect x="58" y="338" width="22" height="54" rx="11" fill="#f2994a" transform="rotate(8 69 365)"/>
+                <ellipse cx="124" cy="372" rx="22" ry="20" fill="#e53935"/><path d="M118 350q6-8 12 0" stroke="#2f8f4a" stroke-width="4" fill="none"/>
+                <ellipse cx="170" cy="372" rx="20" ry="20" fill="#43a047"/><path d="M165 352q6-8 12 0" stroke="#256c2f" stroke-width="4" fill="none"/>
+                <ellipse cx="224" cy="376" rx="26" ry="16" fill="#8e44ad"/><ellipse cx="256" cy="378" rx="14" ry="12" fill="#a569bd"/>
+                <rect x="120" y="318" width="60" height="6" rx="3" fill="#fff" fill-opacity=".9"/>
+              </g>
+            </svg>
+            <div class="fx fx-warm"></div>
+            <div class="fx fx-frost"></div>
+            <div class="fx fx-fog"></div>
+            <div class="fx fx-light"></div>
+          </div>
+
+          <div class="door" id="doorBtn" role="button" tabindex="0" aria-label="Open or close fridge door" aria-pressed="false">
+            <div class="door-face front">
+              <span class="door-label">FridgeLink</span>
+              <div class="fr-handle side"></div>
+              <span class="door-hint">tap door</span>
+            </div>
+            <div class="door-face back">
+              <div class="bin b1"></div><div class="bin b2"></div><div class="bin b3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fr-feet"><i></i><i></i></div>
+    </div>
+  </div>
+
+  <div class="controls" aria-label="Controls">
+    <button class="act" data-act="door" style="--c:#fbbf24"><span class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg></span><span class="tx"><b>Fridge door</b><small>Closed</small></span><span class="tg"></span></button>
+    <button class="act" data-act="mains" style="--c:#fb5a5a"><span class="ic"><svg viewBox="0 0 24 24"><path d="M13 2 5 13h6l-1 9 8-11h-6z"/></svg></span><span class="tx"><b>Mains power</b><small>On</small></span><span class="tg"></span></button>
+    <button class="act" data-act="net" style="--c:#a78bfa"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 19v-3M10 19v-7M15 19V9M20 19V5"/></svg></span><span class="tx"><b>GSM network</b><small>Online</small></span><span class="tg"></span></button>
+    <button class="act" data-act="xray" style="--c:#5ad1ff"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="tx"><b>See inside</b><small>Off</small></span><span class="tg"></span></button>
+  </div>
+
+  <div class="chips" id="chips">
+    <div class="chip" id="chComp"><span>Compressor</span><b>—</b></div>
+    <div class="chip" id="chMains"><span>Mains</span><b>—</b></div>
+    <div class="chip" id="chDoor"><span>Door</span><b>—</b></div>
+    <div class="chip" id="chFood"><span>Food safety</span><b>—</b><button id="restockBtn" hidden>Restock</button></div>
+  </div>
+</section>
+
+<!-- ============================== LAB ============================== -->
+<section class="pane pane-lab" id="pane-lab" aria-label="Hardware lab">
+
+  <div class="card link-card">
+    <h2>Phone link <small>open the phone on another device</small></h2>
+    <div class="row">
+      <div class="qr" id="qr" aria-label="QR code for the phone page"></div>
+      <div class="link-info">
+        <span class="pill wait" id="linkPill"><i></i><span id="linkText">Waiting for phone…</span></span>
+        <div class="url" id="phoneUrl">…</div>
+        <div class="code">Access code <b>209173</b></div>
+        <div class="link-btns"><a class="primary" id="openPhone" href="phone.html" target="_blank" rel="noopener">Open phone page</a><button id="copyUrl">Copy link</button></div>
+        <p id="linkNote"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Settings <small>room temperature and alert limit</small></h2>
+    <div class="sliders">
+      <label>Room temperature <output id="ambOut">30 °C</output><input type="range" id="ambient" min="20" max="42" step="1" value="30"></label>
+      <label>Alert limit <output id="limOut">8 °C</output><input type="range" id="limit" min="2" max="15" step="1" value="8"></label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <h2>Temperature <small id="chartNow"></small></h2>
+      <div class="seg sm" id="winSeg"><button data-win="30">30m</button><button data-win="120" class="on">2h</button><button data-win="360">6h</button><button data-win="720">12h</button></div>
+    </div>
+    <div class="chart-box"><canvas id="chart" aria-label="Temperature history chart" role="img"></canvas></div>
+    <div class="legend"><span><i class="l-line"></i>Cabinet air</span><span><i class="l-lim"></i>Alert limit</span><span><i class="l-comp"></i>Compressor on</span><span><i class="l-pwr"></i>Mains off</span></div>
+  </div>
+
+  <div class="card">
+    <div class="tabs" role="tablist">
+      <button class="on" data-lt="hw" role="tab">Hardware</button>
+      <button data-lt="serial" role="tab">Serial monitor</button>
+      <button data-lt="res" role="tab">Test results</button>
+    </div>
+
+    <!-- hardware -->
+    <div class="lt on" id="lt-hw">
+      <div class="lcd" aria-label="16x2 LCD"><div id="lcd0">                </div><div id="lcd1">                </div></div>
+      <svg class="diagram" viewBox="0 0 560 440" role="img" aria-label="System block diagram">
+        <defs>
+          <marker id="arP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#ff6b6b"/></marker>
+          <marker id="arB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#5ad1ff"/></marker>
+          <marker id="arY" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#fbbf24"/></marker>
+          <marker id="arV" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#a78bfa"/></marker>
+        </defs>
+        <!-- wires -->
+        <path id="wPwr"  class="wire pwr"  d="M190 48H290V112" marker-end="url(#arP)"/>
+        <path id="wTemp" class="wire data" d="M170 160H215" marker-end="url(#arB)"/>
+        <path id="wLdr"  class="wire data" d="M170 250H215" marker-end="url(#arB)"/>
+        <path id="wRly"  class="wire ctl"  d="M365 165H410" marker-end="url(#arY)"/>
+        <path id="wLoad" class="wire pwr"  d="M475 125V78" marker-end="url(#arP)"/>
+        <path id="wGsm"  class="wire ser"  d="M365 270H470V330M470 330H470" marker-end="url(#arV)"/>
+        <path id="wGsm2" class="wire ser"  d="M345 270V300H430V330" marker-end="url(#arV)" opacity="0"/>
+        <path id="wLcd"  class="wire data" d="M290 300V345" marker-end="url(#arB)"/>
+
+        <g class="node psu"><rect x="20" y="20" width="170" height="56" rx="12"/><text x="105" y="43" class="t1">POWER SUPPLY</text><text x="105" y="62" class="t2" id="dPsu">5 V DC · mains OK</text></g>
+        <g class="node sens"><rect x="20" y="128" width="150" height="64" rx="12"/><text x="95" y="152" class="t1">LM35 SENSOR</text><text x="95" y="174" class="t2" id="dLm35">0.000 V</text></g>
+        <g class="node sens"><rect x="20" y="220" width="150" height="64" rx="12"/><text x="95" y="244" class="t1">LDR · DOOR</text><text x="95" y="266" class="t2" id="dLdr">A1 = 0</text></g>
+        <g class="node mcu"><rect x="215" y="112" width="150" height="188" rx="14"/>
+          <text x="290" y="140" class="t1">ARDUINO UNO</text>
+          <text x="290" y="170" class="t2" id="dA0">A0 · ADC 0</text>
+          <text x="290" y="194" class="t2" id="dTemp">0.0 °C</text>
+          <text x="290" y="222" class="t2" id="dD7">D7 · relay —</text>
+          <text x="290" y="246" class="t2">D10/D11 · UART</text>
+          <circle cx="238" cy="276" r="4" id="ledPwr" class="led"/><circle cx="262" cy="276" r="4" id="ledTx" class="led tx"/><circle cx="286" cy="276" r="4" id="ledRx" class="led rx"/>
+          <text x="305" y="280" class="t3">PWR · TX · RX</text>
+        </g>
+        <g class="node relay"><rect x="410" y="128" width="130" height="74" rx="12"/><text x="475" y="152" class="t1">RELAY</text>
+          <rect x="445" y="165" width="60" height="22" rx="11" class="sw" id="swBody"/><circle cx="458" cy="176" r="8" class="knob" id="swKnob"/></g>
+        <g class="node load"><rect x="410" y="20" width="130" height="58" rx="12"/><text x="475" y="43" class="t1">COMPRESSOR</text><text x="475" y="64" class="t2" id="dComp">idle</text></g>
+        <g class="node gsm"><rect x="395" y="330" width="150" height="76" rx="12"/><text x="470" y="354" class="t1">SIM800L · GSM</text><text x="470" y="376" class="t2" id="dGsm">CSQ 19</text>
+          <g id="dBars"><rect x="440" y="386" width="7" height="6" rx="1.5"/><rect x="452" y="383" width="7" height="9" rx="1.5"/><rect x="464" y="380" width="7" height="12" rx="1.5"/><rect x="476" y="377" width="7" height="15" rx="1.5"/><rect x="488" y="374" width="7" height="18" rx="1.5"/></g></g>
+        <g class="node lcdn"><rect x="205" y="345" width="170" height="52" rx="12"/><text x="290" y="368" class="t1">LCD 16×2</text><text x="290" y="386" class="t3">I2C display</text></g>
+        <g class="node bat"><rect x="20" y="330" width="150" height="66" rx="12"/><text x="95" y="354" class="t1">BACKUP BATTERY</text>
+          <rect x="45" y="370" width="100" height="12" rx="6" class="batbg"/><rect x="45" y="370" width="100" height="12" rx="6" class="batfill" id="batFill"/></g>
+        <path class="wire pwr" d="M95 330V300H215" marker-end="url(#arP)" id="wBat" fill="none" opacity=".0"/>
+      </svg>
+    </div>
+
+    <!-- serial -->
+    <div class="lt" id="lt-serial">
+      <div class="term-bar"><span><i class="k tx"></i>Arduino → SIM800L <i class="k rx"></i>SIM800L → Arduino <i class="k sys"></i>firmware</span><button id="clearSerial">Clear</button></div>
+      <div class="term" id="term" role="log"></div>
+    </div>
+
+    <!-- results -->
+    <div class="lt" id="lt-res">
+      <div class="stats">
+        <div><b id="stN">0</b><span>events</span></div>
+        <div><b id="stAvg">—</b><span>avg response</span></div>
+        <div><b id="stMax">—</b><span>slowest</span></div>
+        <div><b id="stOk">—</b><span>delivered</span></div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl"><thead><tr><th>#</th><th>Sim time</th><th>Type</th><th>Event</th><th>Source</th><th>Outcome</th><th>Time (s)</th></tr></thead><tbody id="resBody"></tbody></table>
+        <p class="tbl-empty" id="resEmpty">Send a command or use the controls. Every SMS round-trip is timed here.</p>
+      </div>
+      <div class="res-actions"><button id="csvBtn">Export CSV</button><button id="clearRes">Clear</button></div>
+    </div>
+  </div>
+</section>
+</main>
+
+
+<nav class="tabbar" aria-label="Views">
+  <button data-tab="fridge" class="on"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M5 9.5h14M8.5 6v1.5M8.5 12.5v3"/></svg><span>Fridge</span></button>
+  <button data-tab="lab"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h3l3-11 4 14 3-9h3"/></svg><span>Lab</span></button>
+</nav>
+
+<script src="sim.js"></script>
+<script src="link.js"></script>
+<script src="vendor/qrcode.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

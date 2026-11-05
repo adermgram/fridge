@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: fridgelink
+    runtime: node
+    plan: free
+    buildCommand: echo "no build"
+    startCommand: node server.js
+    healthCheckPath: /info

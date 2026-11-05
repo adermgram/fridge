@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>My Fridge · SMS</title>
+<link rel="stylesheet" href="phone.css">
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="ph-notch"></div>
+  <div class="ph-screen">
+    <div class="sb">
+      <span id="phTime">--:--</span>
+      <span class="sb-r">
+        <svg viewBox="0 0 18 12" width="18" height="12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg>
+        <svg viewBox="0 0 26 12" width="26" height="12" aria-hidden="true"><rect x=".5" y=".5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="16" height="8" rx="2"/><rect x="24" y="4" width="1.6" height="4" rx=".8" opacity=".5"/></svg>
+      </span>
+    </div>
+    <div class="msg-head">
+      <span class="back"><svg viewBox="0 0 12 20" width="10" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"/></svg></span>
+      <div class="avatar"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M5 9.5h14M8.5 6v1.5M8.5 12.5v3"/></svg></div>
+      <div class="who"><b>My Fridge</b><small>+234 809 555 0187</small></div>
+    </div>
+    <div class="conn" id="conn" hidden><i></i><span id="connText">Connecting…</span></div>
+
+    <div class="thread" id="thread" aria-live="polite">
+      <div class="day">Today</div>
+      <div class="empty" id="threadEmpty">
+        <b>Text your fridge</b>
+        <span>Send <code>STATUS</code>, <code>ON</code>, <code>OFF</code>, <code>LIMIT 8</code> or <code>HELP</code>. Alerts arrive here by SMS, no internet needed.</span>
+      </div>
+    </div>
+    <div class="cmds" id="cmds">
+      <button data-cmd="STATUS">STATUS</button><button data-cmd="ON">ON</button><button data-cmd="OFF">OFF</button><button data-cmd="HELP">HELP</button>
+    </div>
+    <form class="composer" id="composer" autocomplete="off">
+      <input id="smsInput" type="text" enterkeyhint="send" placeholder="Text message" maxlength="160" aria-label="Message">
+      <button type="submit" aria-label="Send"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg></button>
+    </form>
+    <div class="home-bar"></div>
+
+    <!-- access code screen -->
+    <div class="lock" id="lock">
+      <div class="lock-ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+      <b>Enter access code</b>
+      <span id="lockMsg">Type the 6-digit code for this fridge</span>
+      <div class="dots" id="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="pad" id="pad">
+        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+        <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+        <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+        <span></span><button data-k="0">0</button>
+        <button data-k="del" aria-label="Delete"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5H9l-6 7 6 7h12z"/><path d="m13 9.5 5 5m0-5-5 5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="link.js"></script>
+<script src="phone.js"></script>
+</body>
+</html>
