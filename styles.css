@@ -216,3 +216,20 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 @media (max-width:520px){ .link-card .row{flex-direction:column;align-items:flex-start} }
 [hidden]{display:none!important}
 .code{font-size:12.5px;color:var(--mut)} .code b{font:700 15px var(--mono);letter-spacing:.2em;color:var(--txt);margin-left:6px}
+
+/* ---------- power state: obvious when the fridge is off or has no mains ---------- */
+.fr-led{position:absolute;left:6%;bottom:7%;width:2.6cqw;height:2.6cqw;border-radius:50%;background:#34d399;box-shadow:0 0 2.4cqw #34d399;transition:.4s}
+.fridge:not([data-power=on]) .fr-led{background:#fb5a5a;box-shadow:0 0 2.4cqw #fb5a5a;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.fr-top,.door-face.front{transition:filter .6s}
+.fridge:not([data-power=on]) .fr-top{filter:grayscale(.75) brightness(.7)}
+.door-face.front::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#0a1020;opacity:0;transition:opacity .6s;pointer-events:none}
+.fridge:not([data-power=on]) .door-face.front::after{opacity:.38}
+.fridge:not([data-power=on]) .fr-display{color:#5d6a80;box-shadow:inset 0 0 0 .4cqw #ffffff14,inset 0 0 6cqw #000}
+.fridge:not([data-power=on]) .disp-temp span{text-shadow:none}
+.fridge[data-power=off] .disp-sub{color:#ff6b6b}.fridge[data-power=cut] .disp-sub{color:#fbbf24}
+.fridge:not([data-power=on]) .fx-light{opacity:0!important}
+.fr-badge{position:absolute;z-index:4;left:50%;top:31.5%;transform:translate(-50%,-50%);padding:1.6cqw 4.2cqw;border-radius:99cqw;white-space:nowrap;
+  font:800 3.4cqw var(--sans);letter-spacing:.35cqw;color:#fff;background:#e23d3d;box-shadow:0 1cqw 3cqw #0008,0 0 0 .6cqw #ffffff55;animation:pop .35s}
+.fridge[data-power=cut] .fr-badge{background:#d98a06}
+@keyframes pop{from{transform:translate(-50%,-50%) scale(.8);opacity:0}}

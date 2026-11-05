@@ -225,6 +225,10 @@ const label = (a, on, onT, offT) => $$(`[data-act=${a}]`).forEach(b => { b.class
     $('fridgeWrap').dataset.comp = S.compOn ? 'on' : 'off';
     fridge.dataset.door = S.door ? 'open' : 'closed'; door.setAttribute('aria-pressed', S.door);
     fridge.dataset.off = !m.alive;
+    const power = !S.mains ? 'cut' : m.alive && m.cmdOff ? 'off' : 'on';
+    fridge.dataset.power = power;
+    $('frBadge').hidden = power === 'on';
+    set('frBadge', power === 'cut' ? 'NO MAINS POWER' : 'FRIDGE SWITCHED OFF');
     const t = m.tempC;
     fridge.style.setProperty('--heat', clamp((S.Ta - 5) / 18, 0, 1).toFixed(3));
     fridge.style.setProperty('--cold', clamp((5.5 - S.Ta) / 4, 0, 1).toFixed(3));
